@@ -4,14 +4,23 @@
 
 ## Code Challenges
 
+### Challenge 01
+
+[array-reverse](https://github.com/nojadzworld/data-structures-and-algorithms/blob/main/java/arrayBinarySearch/README.md)
+
+### Challenge 02
+
+[array-insert-shift](https://github.com/nojadzworld/data-structures-and-algorithms/blob/main/java/arrayInsertShift/README.md)
+
+### Challenge 03
+
+[array-binary-search](https://github.com/nojadzworld/data-structures-and-algorithms/blob/main/java/README.md)
+
 ### Challenge 05
 
-Location: `codechallenges/linkedlist/LinkedListChallenges`
+[singly-linked-list](CC-05.md)
 
-## Linked List Implementation
+### Challenge 06
 
-
-## Approach & Efficiency
-
- Utilized multiple objects to get the Linked List to run.
+[]()
 
