@@ -22,5 +22,5 @@
 
 ### Challenge 06
 
-[]()
+[linked-list-insertions](CC-06.md)
 
