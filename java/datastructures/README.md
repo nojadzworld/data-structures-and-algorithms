@@ -26,5 +26,5 @@
 
 ### Challenge 07
 
-[kth-linked-list]()
+[kth-linked-list](CC-07.md)
 
