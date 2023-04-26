@@ -95,19 +95,22 @@ public class LinkedList {
   }
 
   public int kthFromEnd(int k) {
-
+     if (k < 0) {
+       throw new IllegalArgumentException("k must be a non-negative integer");
+     }
     if (head == null) {
       throw new IllegalStateException("Linked List is empty");
     }
     Node slow = head;
     Node fast = head;
+
     for (int i = 0; i < k; i++) {
-      if (fast == null) {
+      if (fast.next == null) {
         throw new IllegalStateException("k is larger than the size of the Linked List");
       }
       fast = fast.next;
     }
-    while (fast != null) {
+    while (fast.next != null) {
       slow = slow.next;
       fast = fast.next;
     }

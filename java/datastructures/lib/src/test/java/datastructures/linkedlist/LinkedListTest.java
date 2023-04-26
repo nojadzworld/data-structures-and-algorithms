@@ -160,7 +160,7 @@ public class LinkedListTest {
     list.insert(8);
     list.insert(3);
     list.insert(1);
-    Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(-2));
+    Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(5));
   }
 
   @Test void testKthFromEndSizeOfOne()
