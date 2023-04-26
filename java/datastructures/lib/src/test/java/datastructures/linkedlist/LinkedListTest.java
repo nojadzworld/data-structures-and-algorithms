@@ -133,4 +133,58 @@ public class LinkedListTest {
    Assertions.assertFalse(result);
   }
 
+  @Test void testKthFromEndThrowsIllegalStateException()
+  {
+    LinkedList list = new LinkedList();
+    list.insert(2);
+    list.insert(8);
+    list.insert(3);
+    list.insert(1);
+    Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(6));
+  }
+
+  @Test void testKthFromEndSameSize()
+  {
+    LinkedList list = new LinkedList();
+    list.insert(2);
+    list.insert(8);
+    list.insert(3);
+    list.insert(1);
+    Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(4));
+  }
+
+  @Test void testKthFromEndThrowsIllegalStateExceptionNegative()
+  {
+    LinkedList list = new LinkedList();
+    list.insert(2);
+    list.insert(8);
+    list.insert(3);
+    list.insert(1);
+    Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(-2));
+  }
+
+  @Test void testKthFromEndSizeOfOne()
+  {
+    LinkedList list = new LinkedList();
+    list.insert(1);
+   Assertions.assertEquals(1, list.kthFromEnd(0));
+  }
+
+  @Test void testKthFromEnd()
+  {
+    LinkedList list = new LinkedList();
+    list.insert(2);
+    list.insert(8);
+    list.insert(3);
+    list.insert(1);
+    Assertions.assertEquals(3, list.kthFromEnd(2));
+  }
+
+  @Test void testKthFromEndThrowsIllegalStateExceptionException()
+  {
+    LinkedList list = new LinkedList();
+    Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(1));
+  }
+
+
 }

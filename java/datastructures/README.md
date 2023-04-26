@@ -24,3 +24,7 @@
 
 [linked-list-insertions](CC-06.md)
 
+### Challenge 07
+
+[kth-linked-list]()
+

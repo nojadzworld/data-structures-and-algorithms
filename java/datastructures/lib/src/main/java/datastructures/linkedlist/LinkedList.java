@@ -94,6 +94,26 @@ public class LinkedList {
     return false;
   }
 
+  public int kthFromEnd(int k) {
+
+    if (head == null) {
+      throw new IllegalStateException("Linked List is empty");
+    }
+    Node slow = head;
+    Node fast = head;
+    for (int i = 0; i < k; i++) {
+      if (fast == null) {
+        throw new IllegalStateException("k is larger than the size of the Linked List");
+      }
+      fast = fast.next;
+    }
+    while (fast != null) {
+      slow = slow.next;
+      fast = fast.next;
+    }
+    return slow.value;
+  }
+
   @Override
   public String toString() {
     {
