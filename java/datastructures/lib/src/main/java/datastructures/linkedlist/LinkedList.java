@@ -95,9 +95,9 @@ public class LinkedList {
   }
 
   public int kthFromEnd(int k) {
-     if (k < 0) {
-       throw new IllegalArgumentException("k must be a non-negative integer");
-     }
+    if (k < 0) {
+      throw new IllegalArgumentException("k must be a non-negative integer");
+    }
     if (head == null) {
       throw new IllegalStateException("Linked List is empty");
     }
@@ -130,4 +130,48 @@ public class LinkedList {
       return values;
     }
   }
+
+  public static LinkedList zipLists(LinkedList list1, LinkedList list2) {
+
+    if (list1.head == null) {
+      return list2;
+    }
+
+    if (list2.head == null) {
+      return list1;
+    }
+
+
+    LinkedList zippedList = new LinkedList();
+
+
+    Node list1Current = list1.head;
+    Node list2Current = list2.head;
+
+
+    while (list1Current != null || list2Current != null) {
+      if (list1Current != null) {
+        zippedList.append(list1Current.value);
+        list1Current = list1Current.next;
+      }
+
+      if (list2Current != null) {
+        zippedList.append(list2Current.value);
+        list2Current = list2Current.next;
+      }
+    }
+
+
+    return zippedList;
+  }
+
+  public static class Node {
+    public int value;
+    public Node next = null;
+
+    Node(int value) {
+      this.value = value;
+    }
+  }
 }
+

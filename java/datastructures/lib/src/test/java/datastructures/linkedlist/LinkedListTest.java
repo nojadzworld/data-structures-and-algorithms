@@ -186,5 +186,84 @@ public class LinkedListTest {
     Assertions.assertThrows(IllegalStateException.class, () -> list.kthFromEnd(1));
   }
 
+  @Test
+  void testZipLists() {
+    LinkedList list1 = new LinkedList();
+    list1.append(1);
+    list1.append(3);
+    list1.append(5);
+
+    LinkedList list2 = new LinkedList();
+    list2.append(2);
+    list2.append(4);
+    list2.append(6);
+
+    LinkedList expected = new LinkedList();
+    expected.append(1);
+    expected.append(2);
+    expected.append(3);
+    expected.append(4);
+    expected.append(5);
+    expected.append(6);
+
+    LinkedList result = LinkedList.zipLists(list1, list2);
+
+    Assertions.assertEquals(expected.toString(), result.toString());
+  }
+
+  @Test
+  void testZipListsEmptyList() {
+    LinkedList list1 = new LinkedList();
+    LinkedList list2 = new LinkedList();
+
+    LinkedList expected = new LinkedList();
+
+    LinkedList result = LinkedList.zipLists(list1, list2);
+
+    Assertions.assertEquals(expected.toString(), result.toString());
+  }
+
+  @Test
+  void testZipListsWithDifferentSizes() {
+    LinkedList list1 = new LinkedList();
+    list1.append(1);
+    list1.append(3);
+
+    LinkedList list2 = new LinkedList();
+    list2.append(2);
+    list2.append(4);
+    list2.append(6);
+
+    LinkedList expected = new LinkedList();
+    expected.append(1);
+    expected.append(2);
+    expected.append(3);
+    expected.append(4);
+    expected.append(6);
+
+    LinkedList result = LinkedList.zipLists(list1, list2);
+
+    Assertions.assertEquals(expected.toString(), result.toString());
+  }
+
+  @Test
+  void testZipListsWithOneListNull() {
+    LinkedList list1 = new LinkedList();
+    list1.append(1);
+    list1.append(3);
+    list1.append(5);
+
+    LinkedList list2 = new LinkedList();
+
+    LinkedList expected = new LinkedList();
+    expected.append(1);
+    expected.append(3);
+    expected.append(5);
+
+    LinkedList result = LinkedList.zipLists(list1, list2);
+
+    Assertions.assertEquals(expected.toString(), result.toString());
+  }
+
 
 }
