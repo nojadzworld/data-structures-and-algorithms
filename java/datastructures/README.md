@@ -28,3 +28,6 @@
 
 [kth-linked-list](CC-07.md)
 
+### Challenge 08
+
+[linked-list-zip](CC-08.md)
