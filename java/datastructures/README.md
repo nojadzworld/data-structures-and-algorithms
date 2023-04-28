@@ -31,3 +31,7 @@
 ### Challenge 08
 
 [linked-list-zip](CC-08.md)
+
+### Challenge 10
+
+[stack-and-queue](stacks-and-queues.md)
