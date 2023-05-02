@@ -35,3 +35,7 @@
 ### Challenge 10
 
 [stack-and-queue](stacks-and-queues.md)
+
+### Challenge 11
+
+[stack-queue-pseudo](CC-11.md)
