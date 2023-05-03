@@ -39,3 +39,7 @@
 ### Challenge 11
 
 [stack-queue-pseudo](CC-11.md)
+
+### Challenge 12
+
+[stack-queue=animals](CC-12.md)
