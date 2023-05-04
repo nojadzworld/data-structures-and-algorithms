@@ -6,13 +6,13 @@ public class Stack<T> {
 
   Node<T> top;
 
-  void push(T valueToPush) {
+  public void push(T valueToPush) {
     Node<T> newNode = new Node<T>(valueToPush);
     newNode.next = top;
     top = newNode;
   }
 
-  T pop() {
+  public T pop() {
     if (isEmpty()) {
       throw new RuntimeException("Stack is empty.");
     }
@@ -22,14 +22,14 @@ public class Stack<T> {
     return poppedNode.value;
   }
 
-  T peek() {
+  public T peek() {
    if (isEmpty()) {
      throw new RuntimeException("Stack is empty.");
    }
     return top.value;
   }
 
-  boolean isEmpty() {
+  public boolean isEmpty() {
     return top == null;
 
   }
