@@ -1,7 +1,9 @@
 package datastructures.trees;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class BinaryTree<T extends Comparable<T>> {
   protected Node<T> root;
@@ -78,6 +80,28 @@ public class BinaryTree<T extends Comparable<T>> {
     return max;
   }
 
+  public List<T> breadthFirstTraversal() {
+    List<T> output = new ArrayList<>();
+    if (this.root == null) {
+      return output;
+    }
+
+    Queue<Node<T>> queue = new LinkedList<>();
+    queue.offer(this.root);
+
+    while (!queue.isEmpty()) {
+      Node<T> node = queue.poll();
+      output.add(node.value);
+
+      if (node.left != null) {
+        queue.offer(node.left);
+      }
+      if (node.right != null) {
+        queue.offer(node.right);
+      }
+    }
+    return output;
+  }
 
   public Node<T> getRoot() {
     return root;
