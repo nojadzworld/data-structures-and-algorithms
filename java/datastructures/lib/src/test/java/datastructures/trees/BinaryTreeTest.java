@@ -44,4 +44,21 @@ public class BinaryTreeTest {
     List<Integer> postOrder = sut.postOrderTraversal();
     assertEquals(Arrays.asList(3, 8, 5, 12, 18, 15, 10), postOrder);
   }
+
+  @Test
+  void testGetMax() {
+    BinarySearchTree<Integer> tree = new BinarySearchTree<>(2);
+
+    tree.add(7);
+    tree.add(2);
+    tree.add(6);
+    tree.add(5);
+    tree.add(11);
+    tree.add(5);
+    tree.add(9);
+    tree.add(4);
+
+    int expectedMax = 11;
+    assertEquals(expectedMax, tree.getMax());
+  }
 }

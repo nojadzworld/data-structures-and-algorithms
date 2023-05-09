@@ -3,7 +3,7 @@ package datastructures.trees;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinaryTree<T> {
+public class BinaryTree<T extends Comparable<T>> {
   protected Node<T> root;
 
   public BinaryTree(T value) {
@@ -51,6 +51,33 @@ public class BinaryTree<T> {
     postOrderTraversal(node.right, output);
     output.add(node.value);
   }
+
+  public T getMax() {
+    if (this.root == null) {
+      throw new RuntimeException("Tree is empty");
+    }
+
+    return getMax(this.root);
+  }
+
+  private T getMax(Node<T> node) {
+    if (node == null) return null;
+
+    T currentValue = node.value;
+    T leftMax = getMax(node.left);
+    T rightMax = getMax(node.right);
+
+    T max = currentValue;
+    if (leftMax != null && leftMax.compareTo(max) > 0) {
+      max = leftMax;
+    }
+    if (rightMax != null && rightMax.compareTo(max) > 0) {
+      max = rightMax;
+    }
+
+    return max;
+  }
+
 
   public Node<T> getRoot() {
     return root;
