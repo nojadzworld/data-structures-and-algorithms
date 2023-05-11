@@ -103,6 +103,8 @@ public class BinaryTree<T extends Comparable<T>> {
     return output;
   }
 
+
+
   public Node<T> getRoot() {
     return root;
   }
