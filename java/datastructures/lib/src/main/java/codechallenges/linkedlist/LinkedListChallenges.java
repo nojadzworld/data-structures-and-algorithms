@@ -4,11 +4,11 @@ import datastructures.linkedlist.LinkedList;
 
 public class LinkedListChallenges
 {
-  LinkedList linkedList;
+  LinkedList<N> linkedList;
 
   public LinkedListChallenges()
   {
-    linkedList = new LinkedList();
+    linkedList = new LinkedList<N>();
   }
 
   public void linkedListChallenge06()

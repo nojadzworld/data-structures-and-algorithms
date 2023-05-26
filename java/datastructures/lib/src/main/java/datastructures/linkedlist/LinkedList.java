@@ -1,17 +1,23 @@
 package datastructures.linkedlist;
 
-public class LinkedList {
-  public Node head;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
-  public LinkedList() {
-    this.head = null;
-  }
+public class LinkedList
+{
+  public Node head = null;
 
-
-  public void insert(int value) {
+  public void insertAtBeginning(int value) {
     Node newNode = new Node(value);
-    newNode.next = head;
-    head = newNode;
+
+    if (this.head == null) {
+      this.head = newNode;
+      return;
+    }
+
+    newNode.next = this.head;
+    this.head = newNode;
   }
 
   public void append(int value) {
@@ -21,15 +27,17 @@ public class LinkedList {
       this.head = newNode;
       return;
     }
+
     Node current = this.head;
 
     while (current.next != null) {
       current = current.next;
     }
-    current.next = newNode;
 
+    current.next = newNode;
   }
 
+  // We'll make this method return a boolean for whether the operation was successful or not
   public boolean insertBefore(int valueToInsertBefore, int newValue) {
     Node newNode = new Node(newValue);
 
@@ -40,7 +48,7 @@ public class LinkedList {
     Node current = this.head;
 
     if (current.value == valueToInsertBefore) {
-      insert(newValue);
+      insertAtBeginning(newValue);
       return true;
     }
 
@@ -57,7 +65,7 @@ public class LinkedList {
     return false;
   }
 
-
+  // We'll make this method return a boolean for whether the operation was successful or not
   public boolean insertAfter(int valueToInsertAfter, int newValue) {
     Node newNode = new Node(newValue);
 
@@ -83,95 +91,86 @@ public class LinkedList {
     return false;
   }
 
+  // We'll make this method return a boolean for whether the operation was successful or not
+  public boolean deleteNode(int valueToDelete) {
+
+    if (this.head == null) {
+      return false;
+    }
+
+    if (this.head.value == valueToDelete) {
+      this.head = this.head.next;
+      return true;
+    }
+
+    Node current = this.head;
+
+    while (current.next != null) {
+      if (current.next.value == valueToDelete) {
+        current.next = current.next.next;
+        return true;
+      }
+      current = current.next;
+    }
+
+    return false;
+  }
+
   public boolean includes(int value) {
-    Node current = head;
+    Node current = this.head;
+
     while (current != null) {
       if (current.value == value) {
         return true;
       }
       current = current.next;
     }
+
     return false;
   }
 
-  public int kthFromEnd(int k) {
-    if (k < 0) {
-      throw new IllegalArgumentException("k must be a non-negative integer");
-    }
-    if (head == null) {
-      throw new IllegalStateException("Linked List is empty");
-    }
-    Node slow = head;
-    Node fast = head;
 
-    for (int i = 0; i < k; i++) {
-      if (fast.next == null) {
-        throw new IllegalStateException("k is larger than the size of the Linked List");
-      }
-      fast = fast.next;
+  public int kthFromEnd(int k) {
+    // Check that the head is not null
+    if (this.head == null) {
+      throw new NoSuchElementException("The list is empty");
     }
-    while (fast.next != null) {
-      slow = slow.next;
-      fast = fast.next;
+
+    // Check that k is a positive integer or 0
+    if (k < 0) {
+      throw new IllegalArgumentException("k must be greater than or equal to 0");
     }
-    return slow.value;
+
+    Map<Integer, Integer> nodeValueMap= new HashMap<>();
+    Node current = this.head;
+    int index = 0;
+
+    while (current != null) {
+      nodeValueMap.put(index, current.value);
+      index++;
+      current = current.next;
+    }
+
+
+    if (k >= index) {
+      throw new IllegalArgumentException("k must be less than the linked list size");
+    }
+    int size = index;
+    int desiredIndex = size - k - 1;
+
+    return nodeValueMap.get(desiredIndex);
   }
 
   @Override
-  public String toString() {
-    {
-      Node current = this.head;
-      String values = "";
-      while (current != null) {
-        values += String.format("{ %d } -> ", current.value);
-        current = current.next;
-      }
-      values += "NULL";
-      return values;
+  public String toString()
+  {
+    Node current = this.head;
+    String values = "";
+    while (current != null) {
+      values += String.format("{ %d } -> ", current.value);
+      current = current.next;
     }
-  }
-
-  public static LinkedList zipLists(LinkedList list1, LinkedList list2) {
-
-    if (list1.head == null) {
-      return list2;
-    }
-
-    if (list2.head == null) {
-      return list1;
-    }
-
-
-    LinkedList zippedList = new LinkedList();
-
-
-    Node list1Current = list1.head;
-    Node list2Current = list2.head;
-
-
-    while (list1Current != null || list2Current != null) {
-      if (list1Current != null) {
-        zippedList.append(list1Current.value);
-        list1Current = list1Current.next;
-      }
-
-      if (list2Current != null) {
-        zippedList.append(list2Current.value);
-        list2Current = list2Current.next;
-      }
-    }
-
-
-    return zippedList;
-  }
-
-  public static class Node {
-    public int value;
-    public Node next = null;
-
-    Node(int value) {
-      this.value = value;
-    }
+    values += "NULL";
+    return values;
   }
 }
-
