@@ -6,8 +6,8 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree {
     super(value);
   }
 
-  public void add(T value) {
-    this.root = add(this.root, value);
+  public void add(Comparable value) {
+    this.root = add((Node<T>) this.root, (T) value);
   }
 
   private Node<T> add(Node<T> node, T value) {
