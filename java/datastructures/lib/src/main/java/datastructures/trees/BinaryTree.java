@@ -54,30 +54,29 @@ public class BinaryTree<T extends Comparable<T>> {
     output.add(node.value);
   }
 
-  public T getMax() {
-    if (this.root == null) {
-      throw new RuntimeException("Tree is empty");
-    }
-
-    return getMax(this.root);
+  public void add(T value) {
+    Queue<Node<T>> queue = new LinkedList<>();
+    this.root = add(this.root, value, queue);
   }
 
-  private T getMax(Node<T> node) {
-    if (node == null) return null;
-
-    T currentValue = node.value;
-    T leftMax = getMax(node.left);
-    T rightMax = getMax(node.right);
-
-    T max = currentValue;
-    if (leftMax != null && leftMax.compareTo(max) > 0) {
-      max = leftMax;
-    }
-    if (rightMax != null && rightMax.compareTo(max) > 0) {
-      max = rightMax;
+  private Node<T> add(Node<T> node, T value, Queue<Node<T>> queue) {
+    if (node == null) {
+      return new Node<>(value);
     }
 
-    return max;
+    if (node.left == null) {
+      node.left = new Node<>(value);
+      return node;
+    } else if (node.right == null) {
+      node.right = new Node<>(value);
+      return node;
+    } else {
+      queue.add(node.left);
+      queue.add(node.right);
+      add(queue.poll(), value, queue);
+    }
+
+    return node;
   }
 
   public List<T> breadthFirstTraversal() {
@@ -104,8 +103,36 @@ public class BinaryTree<T extends Comparable<T>> {
   }
 
 
+  public T getMax() {
+    if (this.root == null) {
+      throw new RuntimeException("Tree is empty");
+    }
+
+    return getMax(this.root);
+  }
+
+  private T getMax(Node<T> node) {
+    if (node == null) return null;
+
+    T currentValue = node.value;
+    T leftMax = getMax(node.left);
+    T rightMax = getMax(node.right);
+
+    T max = currentValue;
+    if (leftMax != null && leftMax.compareTo(max) > 0) {
+      max = leftMax;
+    }
+    if (rightMax != null && rightMax.compareTo(max) > 0) {
+      max = rightMax;
+    }
+
+    return max;
+  }
+
 
   public Node<T> getRoot() {
     return root;
   }
 }
+
+
