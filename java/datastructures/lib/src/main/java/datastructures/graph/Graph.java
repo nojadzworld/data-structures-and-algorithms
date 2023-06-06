@@ -1,7 +1,6 @@
 package datastructures.graph;
 
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Graph<T extends Comparable<? super T>> implements Comparable<Graph<T>>
 {
@@ -52,6 +51,45 @@ public class Graph<T extends Comparable<? super T>> implements Comparable<Graph<
     public int size()
     {
         return numberOfVertices;
+    }
+
+    public List<Vertex<T>> breadthFirst() {
+        List<Vertex<T>> orderVisited = new ArrayList<>();
+        Queue<Vertex<T>> queue = new LinkedList<>();
+        Set<Vertex<T>> visited = new HashSet<>();
+
+        List<Vertex<T>> vertices = getVertices();
+        if (vertices.isEmpty()) {
+            return orderVisited;
+        }
+
+        for (Vertex<T> vertex : vertices) {
+            if (!visited.contains(vertex)) {
+                queue.add(vertex);
+                visited.add(vertex);
+
+                while (!queue.isEmpty()) {
+                    Vertex<T> current = queue.poll();
+                    orderVisited.add(current);
+                    LinkedList<Edge<T>> neighbors = getNeighbors(current);
+                    if (neighbors != null) {
+                        for (Edge<T> edge : neighbors) {
+                            Vertex<T> neighbor = edge.destination;
+                            if (!visited.contains(neighbor)) {
+                                queue.add(neighbor);
+                                visited.add(neighbor);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (Vertex<T> vertex : orderVisited) {
+            System.out.println(vertex.value);
+        }
+
+        return orderVisited;
     }
 
     @Override

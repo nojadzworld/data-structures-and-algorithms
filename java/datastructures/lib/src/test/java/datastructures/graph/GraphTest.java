@@ -3,6 +3,7 @@ package datastructures.graph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -80,5 +81,40 @@ public class GraphTest {
         assertEquals(1, edges.size());
         assertEquals(singleVertex, edges.get(0).destination);
         assertEquals(0, edges.get(0).weight);
+    }
+
+    @Test
+    public void testBreadthFirstEmpty() {
+        Graph<Integer> graph = new Graph<>(1);
+        List<Vertex<Integer>> result = graph.breadthFirst();
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testBreadthFirstSingle() {
+        Graph<String> graph = new Graph<>(1);
+        graph.addVertex("A");
+        List<Vertex<String>> result = graph.breadthFirst();
+        assertEquals(1, result.size());
+        assertEquals("A", result.get(0).value);
+    }
+
+    @Test
+    public void testBreadthFirstMultiple() {
+        Graph<Character> graph = new Graph<>(1  );
+        graph.addEdge(new Vertex<>('A'), new Vertex<>('B'));
+        graph.addEdge(new Vertex<>('A'), new Vertex<>('C'));
+        graph.addEdge(new Vertex<>('B'), new Vertex<>('D'));
+        graph.addEdge(new Vertex<>('C'), new Vertex<>('E'));
+        graph.addEdge(new Vertex<>('C'), new Vertex<>('F'));
+        List<Vertex<Character>> result = graph.breadthFirst();
+        assertEquals(6, result.size());
+        assertEquals('A', result.get(0).value);
+        assertEquals('B', result.get(1).value);
+        assertEquals('C', result.get(2).value);
+        assertEquals('D', result.get(3).value);
+        assertEquals('E', result.get(4).value);
+        assertEquals('F', result.get(5).value);
+
     }
 }
