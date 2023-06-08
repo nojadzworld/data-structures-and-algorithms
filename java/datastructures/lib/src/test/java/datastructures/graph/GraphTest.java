@@ -1,5 +1,6 @@
 package datastructures.graph;
 
+import codechallenges.linkedlist.GraphBusinessTrip;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
@@ -116,5 +117,50 @@ public class GraphTest {
         assertEquals('E', result.get(4).value);
         assertEquals('F', result.get(5).value);
 
+    }
+
+    @Test
+    public void testBusinessTripWithDirectFlights() {
+        Graph<String> graph = new Graph<>(3);
+        graph.addEdge(new Vertex<>("Arendelle"), new Vertex<>("New Monstropolis"), 42);
+        graph.addEdge(new Vertex<>("New Monstropolis"), new Vertex<>("Naboo"), 73);
+
+        GraphBusinessTrip trip = new GraphBusinessTrip();
+
+        String[] cities = {"Arendelle", "New Monstropolis", "Naboo"};
+        Integer result = trip.businessTrip(graph, cities);
+
+        assertEquals(Integer.valueOf(115), result);
+    }
+
+    @Test
+    public void testBusinessTripWithMissingCity() {
+        Graph<String> graph = new Graph<>(4);
+        graph.addEdge(new Vertex<>("Arendelle"), new Vertex<>("New Monstropolis"), 42);
+        graph.addEdge(new Vertex<>("New Monstropolis"), new Vertex<>("Naboo"), 73);
+
+        GraphBusinessTrip trip = new GraphBusinessTrip();
+
+        String[] cities = {"Arendelle", "New Monstropolis", "Naboo", "Las Vegas"};
+        Integer result = trip.businessTrip(graph, cities);
+
+
+        assertEquals(null, result);
+    }
+
+    @Test
+    public void testBusinessTripWithNoDirectFlight() {
+        Graph<String> graph = new Graph<>(4);
+        graph.addEdge(new Vertex<>("Arendelle"), new Vertex<>("New Monstropolis"), 42);
+        graph.addEdge(new Vertex<>("Arendelle"), new Vertex<>("Pandora"), 150);
+        graph.addEdge(new Vertex<>("Pandora"), new Vertex<>("Naboo"), 108);
+
+        GraphBusinessTrip trip = new GraphBusinessTrip();
+
+        String[] cities = {"Arendelle", "New Monstropolis", "Naboo"};
+        Integer result = trip.businessTrip(graph, cities);
+
+        // There is no direct flight from Portland to Los Angeles, so the result should be null
+        assertEquals(null, result);
     }
 }
