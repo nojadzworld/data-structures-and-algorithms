@@ -163,4 +163,96 @@ public class GraphTest {
         // There is no direct flight from Portland to Los Angeles, so the result should be null
         assertEquals(null, result);
     }
+
+    @Test
+    public void testGraphWithLinearStructure() {
+        Graph<Character> graph = new Graph<>(5);
+        Vertex<Character> vertexA = graph.addVertex('A');
+        Vertex<Character> vertexB = graph.addVertex('B');
+        Vertex<Character> vertexC = graph.addVertex('C');
+        Vertex<Character> vertexD = graph.addVertex('D');
+        Vertex<Character> vertexE = graph.addVertex('E');
+
+        graph.addEdge(vertexA, vertexB);
+        graph.addEdge(vertexB, vertexC);
+        graph.addEdge(vertexC, vertexD);
+        graph.addEdge(vertexD, vertexE);
+
+        List<Vertex<Character>> traversalOrder = graph.depthFirst(vertexA);
+
+// Test assertions
+        assert traversalOrder.get(0).getValue() == 'A';
+        assert traversalOrder.get(1).getValue() == 'B';
+        assert traversalOrder.get(2).getValue() == 'C';
+        assert traversalOrder.get(3).getValue() == 'D';
+        assert traversalOrder.get(4).getValue() == 'E';
+    }
+
+    @Test
+    public void testGraphWithDisconnects() {
+        Graph<Character> graph = new Graph<>(8);
+        Vertex<Character> vertexA = graph.addVertex('A');
+        Vertex<Character> vertexB = graph.addVertex('B');
+        Vertex<Character> vertexC = graph.addVertex('C');
+        Vertex<Character> vertexD = graph.addVertex('D');
+        Vertex<Character> vertexE = graph.addVertex('E');
+        Vertex<Character> vertexF = graph.addVertex('F');
+        Vertex<Character> vertexG = graph.addVertex('G');
+        Vertex<Character> vertexH = graph.addVertex('H');
+
+        graph.addEdge(vertexA, vertexB);
+        graph.addEdge(vertexB, vertexC);
+        graph.addEdge(vertexC, vertexD);
+        graph.addEdge(vertexE, vertexF);
+        graph.addEdge(vertexF, vertexG);
+        graph.addEdge(vertexG, vertexH);
+
+        List<Vertex<Character>> traversalOrder = graph.depthFirst(vertexA);
+
+// Test assertions
+        assert traversalOrder.get(0).getValue() == 'A';
+        assert traversalOrder.get(1).getValue() == 'B';
+        assert traversalOrder.get(2).getValue() == 'C';
+        assert traversalOrder.get(3).getValue() == 'D';
+        assert traversalOrder.get(4).getValue() == 'E';
+        assert traversalOrder.get(5).getValue() == 'F';
+        assert traversalOrder.get(6).getValue() == 'G';
+        assert traversalOrder.get(7).getValue() == 'H';
+    }
+
+    @Test
+    public void testGraphWithBranchingStructure() {
+        Graph<Character> graph = new Graph<>(9);
+        Vertex<Character> vertexA = graph.addVertex('A');
+        Vertex<Character> vertexB = graph.addVertex('B');
+        Vertex<Character> vertexC = graph.addVertex('C');
+        Vertex<Character> vertexD = graph.addVertex('D');
+        Vertex<Character> vertexE = graph.addVertex('E');
+        Vertex<Character> vertexF = graph.addVertex('F');
+        Vertex<Character> vertexG = graph.addVertex('G');
+        Vertex<Character> vertexH = graph.addVertex('H');
+        Vertex<Character> vertexI = graph.addVertex('I');
+
+        graph.addEdge(vertexA, vertexB);
+        graph.addEdge(vertexA, vertexC);
+        graph.addEdge(vertexB, vertexD);
+        graph.addEdge(vertexB, vertexE);
+        graph.addEdge(vertexC, vertexF);
+        graph.addEdge(vertexC, vertexG);
+        graph.addEdge(vertexE, vertexH);
+        graph.addEdge(vertexE, vertexI);
+
+        List<Vertex<Character>> traversalOrder = graph.depthFirst(vertexA);
+
+// Test assertions
+        assert traversalOrder.get(0).getValue() == 'A';
+        assert traversalOrder.get(1).getValue() == 'B';
+        assert traversalOrder.get(2).getValue() == 'C';
+        assert traversalOrder.get(3).getValue() == 'F';
+        assert traversalOrder.get(4).getValue() == 'G';
+        assert traversalOrder.get(5).getValue() == 'D';
+        assert traversalOrder.get(6).getValue() == 'E';
+        assert traversalOrder.get(7).getValue() == 'H';
+        assert traversalOrder.get(8).getValue() == 'I';
+    }
 }

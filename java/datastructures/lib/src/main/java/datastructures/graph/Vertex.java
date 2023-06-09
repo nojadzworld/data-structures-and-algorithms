@@ -11,6 +11,10 @@ public class Vertex<T extends Comparable<? super T>> implements Comparable<Verte
         this.value = value;
     }
 
+    public T getValue() {
+        return value;
+    }
+
     @Override
     public int compareTo(Vertex<T> o)
     {

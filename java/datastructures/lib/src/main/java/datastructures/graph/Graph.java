@@ -92,6 +92,35 @@ public class Graph<T extends Comparable<? super T>> implements Comparable<Graph<
         return orderVisited;
     }
 
+    public List<Vertex<T>> depthFirst(Vertex<T> start) {
+        List<Vertex<T>> traversalOrder = new ArrayList<>();
+        Set<Vertex<T>> visited = new HashSet<>();
+
+        depthFirstTraversal(start, visited, traversalOrder);
+
+        for (Vertex<T> vertex : traversalOrder) {
+            System.out.println(vertex.value);
+        }
+
+        return traversalOrder;
+    }
+
+    private void depthFirstTraversal(Vertex<T> current, Set<Vertex<T>> visited, List<Vertex<T>> traversalOrder) {
+        visited.add(current);
+        traversalOrder.add(current);
+
+        LinkedList<Edge<T>> neighbors = getNeighbors(current);
+        if (neighbors != null) {
+            for (Edge<T> edge : neighbors) {
+                Vertex<T> neighbor = edge.destination;
+                if (!visited.contains(neighbor)) {
+                    depthFirstTraversal(neighbor, visited, traversalOrder);
+                }
+            }
+        }
+    }
+
+
     @Override
     public int compareTo(Graph<T> o)
     {
